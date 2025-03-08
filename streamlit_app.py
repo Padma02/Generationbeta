@@ -5,7 +5,7 @@ from openai import OpenAI
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # Title of the app
-st.title("Generation Beta & Post-2020 Kids Parenting Bot")
+st.title("Beta Kids Parenting guide Bot")
 
 # Initialize session state for chat history
 if "messages" not in st.session_state:
