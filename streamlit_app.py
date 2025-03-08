@@ -5,7 +5,7 @@ from openai import OpenAI
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # Title of the app
-st.title("Beta Kids Parenting guide Bot")
+st.title("Generation Beta & Post-2020 Kids Parenting Bot")
 
 # Initialize session state for chat history
 if "messages" not in st.session_state:
@@ -25,9 +25,21 @@ def is_relevant_query(query):
     relevant_keywords = [
         "Generation Beta", "Gen Beta", "future generation", "youth trends", "technology impact", 
         "education trends", "Gen Beta lifestyle", "parenting Gen Beta", "raising Gen Beta kids", "child development Gen Beta", 
-        "kids born after 2020", "post-2020 kids", "new generation parenting", "modern child development"
+        "kids born after 2020", "post-2020 kids", "new generation parenting", "modern child development", 
+        "childcare", "toddler behavior", "discipline techniques", "parenting tips", "educational tools", "screen time management"
     ]
     return any(keyword.lower() in query.lower() for keyword in relevant_keywords)
+
+# Function to get related topics for parenting guidance
+def get_related_topics():
+    return [
+        "Effective discipline strategies for post-2020 kids",
+        "How technology is shaping Generation Beta’s learning habits",
+        "Balancing screen time and outdoor activities",
+        "Emotional intelligence development in young children",
+        "Parenting techniques for digital-age children",
+        "Best educational toys and tools for young learners"
+    ]
 
 # Function to get a response from OpenAI with parenting topics for Gen Beta and post-2020 kids
 def get_response(prompt):
@@ -65,6 +77,11 @@ if user_input:
 
         with st.chat_message("assistant"):
             st.markdown(assistant_response)
+            
+        # Display related topics
+        st.markdown("**Related Topics You Might Find Helpful:**")
+        for topic in get_related_topics():
+            st.markdown(f"- {topic}")
     else:
         with st.chat_message("assistant"):
             st.markdown("I'm sorry, but I can only discuss parenting topics for kids born after 2020. Please ask something relevant!")
